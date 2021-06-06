@@ -18,6 +18,10 @@ class Net(nn.Module):
         	kernel = 6
         	stride = 2
         	padding = 2
+        elif scale_factor == 3:
+        	kernel = 8
+        	stride = 3
+        	padding = 2
         elif scale_factor == 4:
         	kernel = 8
         	stride = 4

@@ -200,7 +200,7 @@ class DatasetFromFolder(data.Dataset):
         #     target, input, neigbor = load_img_future(self.image_filenames[index], self.nFrames, self.upscale_factor, self.other_dataset, False)
         # else:
         #     target, input, neigbor = load_img(self.image_filenames[index], self.nFrames, self.upscale_factor, self.other_dataset, False)
-        target, input, neigbor = load_img_future(self.image_filenames[index], self.nFrames, self.upscale_factor, self.other_dataset, False)
+        target, input, neigbor = load_img_future(self.image_filenames[index], self.image_lr_filenames[index], self.nFrames, self.upscale_factor, self.other_dataset, False)
 
         if self.patch_size != 0:
             input, target, neigbor, _ = get_patch(input,target,neigbor,self.patch_size, self.upscale_factor, self.nFrames)
