@@ -11,9 +11,9 @@ def transform():
         ToTensor(),
     ])
 
-def get_training_set(data_dir, nFrames, upscale_factor, data_augmentation, file_list, other_dataset, patch_size, future_frame):
+def get_training_set(data_dir, nFrames, upscale_factor, data_augmentation, file_list, file_list_lr, other_dataset, patch_size, future_frame):
     print("Training samples chosen:", file_list)
-    return DatasetFromFolder(data_dir,nFrames, upscale_factor, data_augmentation, file_list, other_dataset, patch_size,future_frame,
+    return DatasetFromFolder(data_dir,nFrames, upscale_factor, data_augmentation, file_list, file_list_lr, other_dataset, patch_size,future_frame,
                              transform=transform())
 
 

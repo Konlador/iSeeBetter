@@ -34,6 +34,7 @@ parser.add_argument('--seed', type=int, default=123, help='random seed to use. D
 parser.add_argument('--gpus', default=8, type=int, help='number of gpu')
 parser.add_argument('--data_dir', type=str, default='./vimeo_septuplet/sequences')
 parser.add_argument('--file_list', type=str, default='sep_trainlist.txt')
+parser.add_argument('--file_list_lr', type=str, default='sep_trainlist.txt')
 parser.add_argument('--other_dataset', type=bool, default=False, help="use other dataset than vimeo-90k")
 parser.add_argument('--future_frame', type=bool, default=True, help="use future frame")
 parser.add_argument('--nFrames', type=int, default=7)
@@ -198,7 +199,7 @@ def main():
     # Load dataset
     logger.info('==> Loading datasets')
     train_set = get_training_set(args.data_dir, args.nFrames, args.upscale_factor, args.data_augmentation,
-                                 args.file_list,
+                                 args.file_list, args.file_list_lr,
                                  args.other_dataset, args.patch_size, args.future_frame)
     training_data_loader = DataLoader(dataset=train_set, num_workers=args.threads, batch_size=args.batchSize,
                                       shuffle=True)
