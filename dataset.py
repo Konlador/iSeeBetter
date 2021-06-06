@@ -181,7 +181,7 @@ class DatasetFromFolder(data.Dataset):
         alist = [line.rstrip() for line in open(join(image_dir,file_list))]
         self.image_filenames = [join(image_dir,x) for x in alist]
 
-        if os.doesfileexist(file_list_lr):
+        if os.path.exists(file_list_lr):
             alist = [line.rstrip() for line in open(join(image_dir, file_list_lr))]
             self.image_lr_filenames = [join(image_dir,x) for x in alist]
         else:
