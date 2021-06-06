@@ -212,16 +212,13 @@ class DatasetFromFolder(data.Dataset):
             
         flow = [get_flow(input,j) for j in neigbor]
             
-        bicubic = rescale_img(input, self.upscale_factor)
-        
         if self.transform:
             target = self.transform(target)
             input = self.transform(input)
-            bicubic = self.transform(bicubic)
             neigbor = [self.transform(j) for j in neigbor]
             flow = [torch.from_numpy(j.transpose(2,0,1)) for j in flow]
 
-        return input, target, neigbor, flow, bicubic
+        return input, target, neigbor, flow
 
     def __len__(self):
         return len(self.image_filenames)
@@ -246,16 +243,13 @@ class DatasetFromFolderTest(data.Dataset):
             
         flow = [get_flow(input,j) for j in neigbor]
 
-        bicubic = rescale_img(input, self.upscale_factor)
-        
         if self.transform:
             target = self.transform(target)
             input = self.transform(input)
-            bicubic = self.transform(bicubic)
             neigbor = [self.transform(j) for j in neigbor]
             flow = [torch.from_numpy(j.transpose(2,0,1)) for j in flow]
             
-        return input, target, neigbor, flow, bicubic
+        return input, target, neigbor, flow
       
     def __len__(self):
         return len(self.image_filenames)

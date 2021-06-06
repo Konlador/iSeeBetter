@@ -85,17 +85,15 @@ def eval():
     if not upscale_only:
         avg_psnr_predicted = 0.0
     for batch in testing_data_loader:
-        input, target, neigbor, flow, bicubic = batch[0], batch[1], batch[2], batch[3], batch[4]
+        input, target, neigbor, flow = batch[0], batch[1], batch[2], batch[3]
         
         with torch.no_grad():
             if cuda:
                 input = Variable(input).cuda(gpus_list[0])
-                bicubic = Variable(bicubic).cuda(gpus_list[0])
                 neigbor = [Variable(j).cuda(gpus_list[0]) for j in neigbor]
                 flow = [Variable(j).cuda(gpus_list[0]).float() for j in flow]
             else:
                 input = Variable(input).to(device=device, dtype=torch.float)
-                bicubic = Variable(bicubic).to(device=device, dtype=torch.float)
                 neigbor = [Variable(j).to(device=device, dtype=torch.float) for j in neigbor]
                 flow = [Variable(j).to(device=device, dtype=torch.float) for j in flow]
 
@@ -107,9 +105,6 @@ def eval():
             with torch.no_grad():
                 prediction = model(input, neigbor, flow)
         
-        if args.residual:
-            prediction = prediction + bicubic
-            
         t1 = time.time()
         print("==> Processing: %s || Timer: %.4f sec." % (str(count), (t1 - t0)))
         save_img(prediction.cpu().data, str(count), True)

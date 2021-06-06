@@ -58,18 +58,14 @@ def train(epoch):
     for iteration, batch in enumerate(training_data_loader, 1):
         #import pdb; pdb.set_trace()
 
-        input, target, neigbor, flow, bicubic = batch[0], batch[1], batch[2], batch[3], batch[4]
+        input, target, neigbor, flow = batch[0], batch[1], batch[2], batch[3]
         input = Variable(input).to(device=device, dtype=torch.float)
-        bicubic = Variable(bicubic).to(device=device, dtype=torch.float)
         neigbor = [Variable(j).to(device=device, dtype=torch.float) for j in neigbor]
         flow = [Variable(j).to(device=device, dtype=torch.float) for j in flow]
 
         optimizer.zero_grad()
         t0 = time.time()
         prediction = model(input, neigbor, flow)
-
-        if opt.residual:
-            prediction = prediction + bicubic
 
         loss = criterion(prediction, target)
         t1 = time.time()
