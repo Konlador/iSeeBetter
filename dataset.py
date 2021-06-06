@@ -56,7 +56,7 @@ def load_img(filepath, nFrames, scale, other_dataset, upscale_only):
 
 def load_img_future(filepath, filepath_lr, nFrames, scale, other_dataset, upscale_only):
     if not upscale_only and not os.path.exists(filepath_lr):
-        raise Exception('Need to provide low resolution filepath if upscale_only is false')
+        raise Exception(f'Need to provide low resolution filepath if upscale_only is false: {filepath_lr}')
 
     tt = int(nFrames/2)
     if upscale_only:
@@ -85,7 +85,7 @@ def load_img_future(filepath, filepath_lr, nFrames, scale, other_dataset, upscal
         if os.path.exists(file_name1):
             neigbor.append(Image.open(file_name1).convert('RGB'))
         else:
-            print('neigbor frame does not exist')
+            #print('neigbor frame does not exist')
             temp=input
             neigbor.append(temp)
     return target, input, neigbor

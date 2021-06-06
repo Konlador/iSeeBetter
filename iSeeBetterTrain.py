@@ -16,7 +16,7 @@ from torch.utils.data import DataLoader
 import utils
 
 ################################################## iSEEBETTER TRAINER KNOBS ############################################
-UPSCALE_FACTOR = 4
+UPSCALE_FACTOR = 2
 ########################################################################################################################
 
 # Handle command line arguments
